@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL") // add this to your .env file
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String  @unique
+  password String
+  role     String
+  requests Request[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  items Item[]
+}
+
+model Item {
+  id         Int       @id @default(autoincrement())
+  name       String
+  quantity   Int
+  condition  String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  requests   Request[]
+}
+
+model Request {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  item       Item     @relation(fields: [itemId], references: [id])
+  itemId     Int
+  status     String   @default("Pending")
+  requestDate DateTime @default(now())
+}
