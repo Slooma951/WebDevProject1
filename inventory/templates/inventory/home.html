@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Available Items</h2>
+  <ul>
+    {% for item in items %}
+      <li>
+        {{ item.name }} ({{ item.quantity }}) - {{ item.item_condition }}
+        <a href="{% url 'request_item' item.id %}">Request</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

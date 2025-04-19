@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Football Inventory</title>
+</head>
+<body>
+  {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }} | <a href="/admin/logout/">Logout</a></p>
+  {% endif %}
+  {% block content %}{% endblock %}
+</body>
+</html>

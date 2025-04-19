@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Item Requests</h2>
+
+<table border="1">
+  <tr>
+    <th>User</th>
+    <th>Item</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  {% for req in requests %}
+  <tr>
+    <td>{{ req.user.username }}</td>
+    <td>{{ req.item.name }}</td>
+    <td>{{ req.status }}</td>
+    <td>
+      {% if req.status == "Pending" %}
+        <a href="{% url 'approve_request' req.id %}">Approve</a> |
+        <a href="{% url 'reject_request' req.id %}">Reject</a>
+      {% else %}
+        {{ req.status }}
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
