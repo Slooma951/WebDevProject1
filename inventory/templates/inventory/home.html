@@ -1,12 +1,14 @@
-{% extends "base.html" %}
-{% block content %}
-  <h2>Available Items</h2>
-  <ul>
-    {% for item in items %}
-      <li>
-        {{ item.name }} ({{ item.quantity }}) - {{ item.item_condition }}
-        <a href="{% url 'request_item' item.id %}">Request</a>
-      </li>
-    {% endfor %}
-  </ul>
-{% endblock %}
+<nav>
+  {% if user.is_authenticated %}
+    <strong>{{ user.username }} ({{ user.role }})</strong>
+    <a href="/">Home</a>
+    {% if user.role == 'Admin' %}
+      <a href="/admin/requests/">Admin Panel</a>
+    {% elif user.role == 'Coach' or user.role == 'Customer' %}
+      <a href="/my-requests/">My Requests</a>
+    {% endif %}
+    <a href="{% url 'logout' %}">Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+</nav>
