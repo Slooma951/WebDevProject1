@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Football Inventory</title>
+    <title>Football Inventory System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin-right: 15px;
+        }
+    </style>
 </head>
 <body>
-  {% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }} | <a href="/admin/logout/">Logout</a></p>
-  {% endif %}
-  {% block content %}{% endblock %}
+    {% if user.is_authenticated %}
+        <nav>
+            <strong>Logged in as:</strong> {{ user.username }} |
+            <a href="/">Home</a>
+            <a href="/my-requests/">My Requests</a>
+            {% if user.role == 'Admin' %}
+                <a href="/admin/requests/">Admin Panel</a>
+            {% endif %}
+            <a href="/admin/logout/">Logout</a>
+        </nav>
+    {% endif %}
+
+    <hr>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
