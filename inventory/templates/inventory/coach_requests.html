@@ -1,0 +1,26 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+<h2>Pending Item Requests</h2>
+
+<table border="1">
+  <tr>
+    <th>Player</th>
+    <th>Item</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  {% for req in requests %}
+  <tr>
+    <td>{{ req.user.username }}</td>
+    <td>{{ req.item.name }}</td>
+    <td>{{ req.status }}</td>
+    <td>
+      <a href="{% url 'approve_request' req.id %}">Approve</a> |
+      <a href="{% url 'reject_request' req.id %}">Reject</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="4">No pending requests.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

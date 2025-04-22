@@ -7,6 +7,7 @@ class User(AbstractUser):
         ('Coach', 'Coach'),
         ('Customer', 'Customer')
     ]
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Customer')
 
 
 class Category(models.Model):
