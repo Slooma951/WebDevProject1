@@ -1,0 +1,18 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+<h2>My Item Requests</h2>
+<table border="1">
+  <tr>
+    <th>Item</th>
+    <th>Status</th>
+    <th>Date</th>
+  </tr>
+  {% for req in requests %}
+  <tr>
+    <td>{{ req.item.name }}</td>
+    <td>{{ req.status }}</td>
+    <td>{{ req.request_date }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
