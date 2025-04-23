@@ -1,0 +1,22 @@
+[
+  {
+    "model": "inventory.item",
+    "pk": 4,
+    "fields": {
+      "name": "Shinpad",
+      "quantity": 10,
+      "item_condition": "New",
+      "category": 2
+    }
+  },
+  {
+    "model": "inventory.item",
+    "pk": 5,
+    "fields": {
+      "name": "Boots",
+      "quantity": 15,
+      "item_condition": "Used",
+      "category": 2
+    }
+  }
+]
