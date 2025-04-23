@@ -10,5 +10,5 @@ urlpatterns = [
     path('', include('inventory.urls')),  # include urls from the inventory app
     path('my-requests/', views.my_requests, name='my_requests'),  # customer and coach view their requests
     path('login/', auth_views.LoginView.as_view(template_name='inventory/login.html'), name='login'),  # login page
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # logout action using built-in logout
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),  # logout with redirect to login
 ]
