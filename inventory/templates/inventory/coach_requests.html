@@ -1,29 +1,35 @@
 {% extends "inventory/base.html" %}
 
 {% block content %}
-<h2>Pending Item Requests</h2>
+<h2 class="mb-4">Pending Item Requests</h2>
 
-<table border="1">
-  <tr>
-    <th>Player</th>
-    <th>Item</th>
-    <th>Status</th>
-    <th>Actions</th>
-  </tr>
-  {% for req in requests %}
-  <tr>
-    <td>{{ req.user.username }}</td>
-    <td>{{ req.item.name }}</td>
-    <td>{{ req.status }}</td>
-    <td>
-      <a href="{% url 'approve_request' req.id %}">Approve</a> |
-      <a href="{% url 'reject_request' req.id %}">Reject</a>
-    </td>
-  </tr>
-  {% empty %}
-  <tr>
-    <td colspan="4">No pending requests.</td>
-  </tr>
-  {% endfor %}
+{% if requests %}
+<table class="table table-bordered table-dark table-hover">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Item</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for req in requests %}
+    <tr>
+      <td>{{ req.user.username }}</td>
+      <td>{{ req.item.name }}</td>
+      <td>{{ req.status }}</td>
+      <td>
+        <a href="{% url 'approve_request' req.id %}" class="btn-action">Approve</a> |
+        <a href="{% url 'reject_request' req.id %}" class="btn-action">Reject</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+{% else %}
+<div class="alert alert-info text-white bg-dark border-light">
+  No pending requests.
+</div>
+{% endif %}
 {% endblock %}
