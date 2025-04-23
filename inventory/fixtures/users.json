@@ -1,0 +1,32 @@
+[
+  {
+    "model": "inventory.user",
+    "pk": 4,
+    "fields": {
+      "username": "admin2",
+      "email": "admin2@admin.com",
+      "password": "password",
+      "role": "Admin"
+    }
+  },
+  {
+    "model": "inventory.user",
+    "pk": 5,
+    "fields": {
+      "username": "coach2",
+      "email": "coach2@club.com",
+      "password": "password",
+      "role": "Coach"
+    }
+  },
+  {
+    "model": "inventory.user",
+    "pk": 6,
+    "fields": {
+      "username": "user2",
+      "email": "user2@user2.com",
+      "password": "password",
+      "role": "Customer"
+    }
+  }
+]
