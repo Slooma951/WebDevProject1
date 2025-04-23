@@ -2,34 +2,36 @@
 <html>
 <head>
     <title>Football Inventory System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-        }
-        nav {
-            margin-bottom: 20px;
-        }
-        nav a {
-            margin-right: 15px;
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cyborg/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <nav>
-            <strong>Logged in as:</strong> {{ user.username }} |
-            <a href="/">Home</a>
-            <a href="/my-requests/">My Requests</a>
-            {% if user.role == 'Admin' %}
-                <a href="/admin/requests/">Admin Panel</a>
+    <div class="container">
+        {% if user.is_authenticated %}
+        <nav class="mb-4">
+            <strong>Logged in as:</strong> {{ user.username }} ({{ user.role }}) |
+            <a href="/">Home</a> |
+            {% if user.role == 'Coach' or user.role == 'Customer' %}
+                <a href="/my-requests/">My Requests</a> |
             {% endif %}
-            <a href="/admin/logout/">Logout</a>
+            {% if user.role == 'Admin' %}
+                <a href="/admin/requests/">Admin Panel</a> |
+            {% endif %}
+            {% if user.role == 'Coach' %}
+                <a href="/coach/requests/">Approve Requests</a> |
+            {% endif %}
+            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link p-0 m-0" style="text-decoration: underline;">
+                    Logout
+                </button>
+            </form>
         </nav>
-    {% endif %}
+        {% endif %}
 
-    <hr>
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>
