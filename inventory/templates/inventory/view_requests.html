@@ -3,31 +3,35 @@
 {% block content %}
 <h2>All Item Requests</h2>
 
-<table border="1">
-  <tr>
-    <th>User</th>
-    <th>Item</th>
-    <th>Status</th>
-    <th>Actions</th>
-  </tr>
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Item</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
   {% for req in requests %}
-  <tr>
-    <td>{{ req.user.username }}</td>
-    <td>{{ req.item.name }}</td>
-    <td>{{ req.status }}</td>
-    <td>
-      {% if req.status == "Pending" %}
-        <a href="{% url 'approve_request' req.id %}">Approve</a> |
-        <a href="{% url 'reject_request' req.id %}">Reject</a>
-      {% else %}
-        {{ req.status }}
-      {% endif %}
-    </td>
-  </tr>
+    <tr>
+      <td>{{ req.user.username }}</td>
+      <td>{{ req.item.name }}</td>
+      <td>{{ req.status }}</td>
+      <td>
+        {% if req.status == "Pending" %}
+          <a href="{% url 'approve_request' req.id %}">Approve</a> |
+          <a href="{% url 'reject_request' req.id %}">Reject</a>
+        {% else %}
+          {{ req.status }}
+        {% endif %}
+      </td>
+    </tr>
   {% empty %}
-  <tr>
-    <td colspan="4">No requests found.</td>
-  </tr>
+    <tr>
+      <td colspan="4">No requests found.</td>
+    </tr>
   {% endfor %}
+  </tbody>
 </table>
 {% endblock %}

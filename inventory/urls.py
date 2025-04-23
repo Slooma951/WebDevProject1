@@ -1,18 +1,17 @@
 from django.urls import path
 from . import views
-from django.contrib.auth import views as auth_views
-
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('request/<int:item_id>/', views.request_item, name='request_item'),
-    path('login/', auth_views.LoginView.as_view(template_name='inventory/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
-    path('coach/requests/', views.coach_approve_requests, name='coach_requests'),
+    path('', views.home, name='home'),  # homepage
+    path('request/<int:item_id>/', views.request_item, name='request_item'),  # request item
 
+    # Coach view pending requests
+    path('coach/requests/', views.coach_approve_requests, name='coach_requests'),  # coach approves requests
 
-    # Admin-only request management
-    path('admin/requests/', views.view_requests, name='view_requests'),
-    path('admin/requests/approve/<int:request_id>/', views.approve_request, name='approve_request'),
-    path('admin/requests/reject/<int:request_id>/', views.reject_request, name='reject_request'),
+    # Approvals - coach and admin both use this
+    path('approve-request/<int:request_id>/', views.approve_request, name='approve_request'),  # approve request
+    path('reject-request/<int:request_id>/', views.reject_request, name='reject_request'),  # reject request
+
+    # Admin view of all requests
+    path('admin/requests/', views.view_requests, name='view_requests'),  # admin view
 ]
