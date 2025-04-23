@@ -1,14 +1,30 @@
-<nav>
-  {% if user.is_authenticated %}
-    <strong>{{ user.username }} ({{ user.role }})</strong>
-    <a href="/">Home</a>
-    {% if user.role == 'Admin' %}
-      <a href="/admin/requests/">Admin Panel</a>
-    {% elif user.role == 'Coach' or user.role == 'Customer' %}
-      <a href="/my-requests/">My Requests</a>
-    {% endif %}
-    <a href="{% url 'logout' %}">Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}">Login</a>
-  {% endif %}
-</nav>
+{% extends "inventory/base.html" %}
+
+{% block content %}
+
+<h2>Available Items</h2>
+
+<form method="get" class="mb-3">
+  <label for="category">Filter by category:</label>
+  <select name="category" id="category" onchange="this.form.submit()" class="form-select w-25 d-inline-block ms-2">
+    <option value="">All</option>
+    {% for cat in categories %}
+      <option value="{{ cat.id }}" {% if selected == cat.id %}selected{% endif %}>
+        {{ cat.name }}
+      </option>
+    {% endfor %}
+  </select>
+</form>
+
+<ul class="list-group">
+  {% for item in items %}
+    <li class="list-group-item bg-dark text-white">
+      {{ item.name }} ({{ item.quantity }}) - {{ item.item_condition }}
+      <a href="{% url 'request_item' item.id %}" class="btn btn-light btn-sm ms-2">Request</a>
+    </li>
+  {% empty %}
+    <li class="list-group-item bg-dark text-white">No items found for this category.</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
