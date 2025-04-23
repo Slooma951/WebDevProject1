@@ -1,6 +1,8 @@
 {% extends "inventory/base.html" %}
+
 {% block content %}
 <h2>My Item Requests</h2>
+
 <table border="1">
   <tr>
     <th>Item</th>
@@ -12,6 +14,10 @@
     <td>{{ req.item.name }}</td>
     <td>{{ req.status }}</td>
     <td>{{ req.request_date }}</td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="3">You have no requests.</td>
   </tr>
   {% endfor %}
 </table>

@@ -1,4 +1,5 @@
 {% extends "inventory/base.html" %}
+
 {% block content %}
 <h2>Pending Item Requests</h2>
 
@@ -20,7 +21,9 @@
     </td>
   </tr>
   {% empty %}
-  <tr><td colspan="4">No pending requests.</td></tr>
+  <tr>
+    <td colspan="4">No pending requests.</td>
+  </tr>
   {% endfor %}
 </table>
 {% endblock %}
